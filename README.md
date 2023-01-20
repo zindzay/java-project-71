@@ -1,5 +1,9 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/zindzay/java-project-71/workflows/hexlet-check/badge.svg)](https://github.com/zindzay/java-project-71/actions)
+[![Maintainability](https://api.codeclimate.com/v1/badges/3b5e4b39ee2061c72d34/maintainability)](https://codeclimate.com/github/zindzay/java-project-71/maintainability)
+
+## Примеры:
+- [Сравнение двух json и вывод в формате stylish](https://asciinema.org/a/DnXLJGOLO7CoxTsncAhIcZ6NQ)
 
 ## Start
 
