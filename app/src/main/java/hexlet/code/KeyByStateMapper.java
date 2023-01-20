@@ -10,26 +10,31 @@ import java.util.TreeSet;
 
 public final class KeyByStateMapper {
     public static Map<String, Entry> map(final Map<String, Object> file1, final Map<String, Object> file2) {
-        final Map<String, Entry> differences = new TreeMap<>();
-
         final Set<String> keys = new TreeSet<>();
         keys.addAll(file1.keySet());
         keys.addAll(file2.keySet());
-        for (String key : keys) {
-            var oldValue = file1.getOrDefault(key, null);
-            var newValue = file2.getOrDefault(key, null);
 
-            if (oldValue == null) {
-                differences.put(key, new Entry(null, newValue, State.ADDED));
-            } else if (newValue == null) {
-                differences.put(key, new Entry(oldValue, null, State.DELETED));
-            } else if (oldValue.equals(newValue)) {
-                differences.put(key, new Entry(oldValue, newValue, State.UNCHANGED));
-            } else {
-                differences.put(key, new Entry(oldValue, newValue, State.CHANGED));
-            }
+        final Map<String, Entry> differences = new TreeMap<>();
+        for (String key : keys) {
+            differences.put(key, createEntry(file1, file2, key));
         }
 
         return differences;
+    }
+
+    private static Entry createEntry(final Map<String, Object> file1, final Map<String, Object> file2,
+                                     final String key) {
+        var oldValue = file1.getOrDefault(key, null);
+        var newValue = file2.getOrDefault(key, null);
+
+        if (oldValue == null) {
+            return new Entry(null, newValue, State.ADDED);
+        } else if (newValue == null) {
+            return new Entry(oldValue, null, State.DELETED);
+        } else if (oldValue.equals(newValue)) {
+            return new Entry(oldValue, newValue, State.UNCHANGED);
+        } else {
+            return new Entry(oldValue, newValue, State.CHANGED);
+        }
     }
 }

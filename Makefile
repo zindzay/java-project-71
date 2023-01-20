@@ -18,6 +18,12 @@ run:
 test:
 	make -C app test
 
+report:
+	make -C app report
+
+update-deps:
+	make -C app update-deps
+
 lint:
 	make -C app lint
 

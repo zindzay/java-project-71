@@ -12,8 +12,7 @@ public final class Differ {
         final var extension2 = FileUtils.getExtension(filePath2);
 
         if (!extension1.equals(extension2)) {
-            throw new IllegalArgumentException("Сan not compare different file types '"
-                    + extension1 + "' and '" + extension2 + "'");
+            throw new IllegalArgumentException("Сan not compare different file types");
         }
 
         final var renderer = RendererFactory.getRenderer(format);

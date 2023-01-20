@@ -10,7 +10,7 @@ public final class RendererFactory {
                 case JSON -> null;
             };
         } catch (Exception e) {
-            throw new UnsupportedOutputFormatException("The output format '" + type + "' is not supported");
+            throw new UnsupportedOutputFormatException("The output format is not supported");
         }
     }
 }

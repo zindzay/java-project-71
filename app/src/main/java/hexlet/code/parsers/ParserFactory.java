@@ -10,7 +10,7 @@ public final class ParserFactory {
                 case YAML -> null;
             };
         } catch (Exception e) {
-            throw new UnsupportedFileTypeException("The file '" + type + "' is not supported");
+            throw new UnsupportedFileTypeException("The file is not supported");
         }
     }
 }
