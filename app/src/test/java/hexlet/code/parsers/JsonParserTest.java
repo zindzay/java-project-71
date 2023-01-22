@@ -1,6 +1,7 @@
 package hexlet.code.parsers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import hexlet.code.TestData;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
@@ -8,21 +9,19 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class JsonParserTest {
+    private TestData testData;
+
+    @BeforeEach
+    public void beforeEach() {
+        testData = new TestData();
+    }
+
 
     @Test
-    void parse() throws JsonProcessingException {
-        final String data = "{\n"
-                + "  \"host\": \"hexlet.io\",\n"
-                + "  \"timeout\": 50,\n"
-                + "  \"proxy\": \"123.234.53.22\",\n"
-                + "  \"follow\": false\n"
-                + "}";
+    void parse() throws Exception {
+        final String data = testData.getJson1();
         final Map<String, Object> actual = new JsonParser().parse(data);
-        final Map<String, Object> expected = Map.of(
-                "host", "hexlet.io",
-                "timeout", 50,
-                "proxy", "123.234.53.22",
-                "follow", false);
+        final Map<String, Object> expected = testData.getJson1Map();
         assertEquals(expected, actual);
     }
 }

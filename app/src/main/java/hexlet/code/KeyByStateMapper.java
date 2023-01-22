@@ -4,6 +4,7 @@ import hexlet.code.entry.Entry;
 import hexlet.code.entry.State;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -27,11 +28,11 @@ public final class KeyByStateMapper {
         var oldValue = file1.getOrDefault(key, null);
         var newValue = file2.getOrDefault(key, null);
 
-        if (oldValue == null) {
+        if (!file1.containsKey(key)) {
             return new Entry(null, newValue, State.ADDED);
-        } else if (newValue == null) {
+        } else if (!file2.containsKey(key)) {
             return new Entry(oldValue, null, State.DELETED);
-        } else if (oldValue.equals(newValue)) {
+        } else if (Objects.deepEquals(oldValue, newValue)) {
             return new Entry(oldValue, newValue, State.UNCHANGED);
         } else {
             return new Entry(oldValue, newValue, State.CHANGED);
