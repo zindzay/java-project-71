@@ -1,7 +1,7 @@
 package hexlet.code.formatters;
 
 import hexlet.code.TestData;
-import hexlet.code.mapper.ValuesByState;
+import hexlet.code.mapper.Node;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,8 +19,8 @@ class PlainFormatterTest {
 
     @Test
     void format() {
-        final Map<String, ValuesByState> entryMap = testData.getEntryMap();
-        final String actual = new PlainFormatter().format(entryMap);
+        final Map<String, Node> keyByNode = testData.getEntryMap();
+        final String actual = new PlainFormatter().format(keyByNode);
         final String expected = testData.getEntryMapPlainFormatString();
         assertEquals(expected, actual);
     }

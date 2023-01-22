@@ -9,7 +9,7 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class StylishFormatterTest {
+class JsonFormatterTest {
     private TestData testData;
 
     @BeforeEach
@@ -20,8 +20,8 @@ class StylishFormatterTest {
     @Test
     void format() {
         final Map<String, Node> keyByNode = testData.getEntryMap();
-        final String actual = new StylishFormatter().format(keyByNode);
-        final String expected = testData.getEntryMapStylishFormatString();
+        final String actual = new JsonFormatter().format(keyByNode);
+        final String expected = testData.getEntryMapJsonFormatString();
         assertEquals(expected, actual);
     }
 }

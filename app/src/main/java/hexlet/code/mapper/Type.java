@@ -1,6 +1,6 @@
 package hexlet.code.mapper;
 
-public enum State {
+public enum Type {
     ADDED,
     DELETED,
     CHANGED,

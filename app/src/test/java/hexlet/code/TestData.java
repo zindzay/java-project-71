@@ -1,7 +1,7 @@
 package hexlet.code;
 
-import hexlet.code.mapper.State;
-import hexlet.code.mapper.ValuesByState;
+import hexlet.code.mapper.Type;
+import hexlet.code.mapper.Node;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -28,25 +28,25 @@ public final class TestData {
         newObj1.put("isNested", true);
     }
 
-    public Map<String, ValuesByState> getEntryMap() {
-        final Map<String, ValuesByState> entryMap = new TreeMap<>();
-        entryMap.put("chars1", new ValuesByState(List.of("a", "b", "c"), List.of("a", "b", "c"), State.UNCHANGED));
-        entryMap.put("chars2", new ValuesByState(List.of("d", "e", "f"), false, State.CHANGED));
-        entryMap.put("checked", new ValuesByState(false, true, State.CHANGED));
-        entryMap.put("default", new ValuesByState(null, newDefault, State.CHANGED));
-        entryMap.put("id", new ValuesByState(oldId, null, State.CHANGED));
-        entryMap.put("key1", new ValuesByState("value1", null, State.DELETED));
-        entryMap.put("key2", new ValuesByState(null, "value2", State.ADDED));
-        entryMap.put("numbers1", new ValuesByState(number1, number1, State.UNCHANGED));
-        entryMap.put("numbers2", new ValuesByState(oldNumbers2, newNumbers2, State.CHANGED));
-        entryMap.put("numbers3", new ValuesByState(oldNumbers3, null, State.DELETED));
-        entryMap.put("numbers4", new ValuesByState(null, newNumbers4, State.ADDED));
-        entryMap.put("obj1", new ValuesByState(null, newObj1, State.ADDED));
-        entryMap.put("setting1", new ValuesByState("Some value", "Another value", State.CHANGED));
-        entryMap.put("setting2", new ValuesByState(oldSetting2, newSetting2, State.CHANGED));
-        entryMap.put("setting3", new ValuesByState(true, "none", State.CHANGED));
+    public Map<String, Node> getEntryMap() {
+        final Map<String, Node> keyByNode = new TreeMap<>();
+        keyByNode.put("chars1", new Node(List.of("a", "b", "c"), List.of("a", "b", "c"), Type.UNCHANGED));
+        keyByNode.put("chars2", new Node(List.of("d", "e", "f"), false, Type.CHANGED));
+        keyByNode.put("checked", new Node(false, true, Type.CHANGED));
+        keyByNode.put("default", new Node(null, newDefault, Type.CHANGED));
+        keyByNode.put("id", new Node(oldId, null, Type.CHANGED));
+        keyByNode.put("key1", new Node("value1", null, Type.DELETED));
+        keyByNode.put("key2", new Node(null, "value2", Type.ADDED));
+        keyByNode.put("numbers1", new Node(number1, number1, Type.UNCHANGED));
+        keyByNode.put("numbers2", new Node(oldNumbers2, newNumbers2, Type.CHANGED));
+        keyByNode.put("numbers3", new Node(oldNumbers3, null, Type.DELETED));
+        keyByNode.put("numbers4", new Node(null, newNumbers4, Type.ADDED));
+        keyByNode.put("obj1", new Node(null, newObj1, Type.ADDED));
+        keyByNode.put("setting1", new Node("Some value", "Another value", Type.CHANGED));
+        keyByNode.put("setting2", new Node(oldSetting2, newSetting2, Type.CHANGED));
+        keyByNode.put("setting3", new Node(true, "none", Type.CHANGED));
 
-        return entryMap;
+        return keyByNode;
     }
 
     public String getEntryMapStylishFormatString() {
@@ -93,6 +93,23 @@ public final class TestData {
                 + "Property 'setting3' was updated. From true to 'none'";
     }
 
+    public String getEntryMapJsonFormatString() {
+        return "{\"chars1\":{\"oldValue\":[\"a\",\"b\",\"c\"],\"newValue\":[\"a\",\"b\",\"c\"],\"type\":"
+                + "\"UNCHANGED\"},\"chars2\":{\"oldValue\":[\"d\",\"e\",\"f\"],\"newValue\":false,\"type\":"
+                + "\"CHANGED\"},\"checked\":{\"oldValue\":false,\"newValue\":true,\"type\":\"CHANGED\"},\"default\""
+                + ":{\"oldValue\":null,\"newValue\":[\"value1\",\"value2\"],\"type\":\"CHANGED\"},\"id\":"
+                + "{\"oldValue\":45,\"newValue\":null,\"type\":\"CHANGED\"},\"key1\":{\"oldValue\":\"value1\","
+                + "\"newValue\":null,\"type\":\"DELETED\"},\"key2\":{\"oldValue\":null,\"newValue\":\"value2\","
+                + "\"type\":\"ADDED\"},\"numbers1\":{\"oldValue\":[1,2,3,4],\"newValue\":[1,2,3,4],\"type\":"
+                + "\"UNCHANGED\"},\"numbers2\":{\"oldValue\":[2,3,4,5],\"newValue\":[22,33,44,55],\"type\":"
+                + "\"CHANGED\"},\"numbers3\":{\"oldValue\":[3,4,5],\"newValue\":null,\"type\":\"DELETED\"},"
+                + "\"numbers4\":{\"oldValue\":null,\"newValue\":[4,5,6],\"type\":\"ADDED\"},\"obj1\":"
+                + "{\"oldValue\":null,\"newValue\":{\"nestedKey\":\"value\",\"isNested\":true},\"type\":\"ADDED\"},"
+                + "\"setting1\":{\"oldValue\":\"Some value\",\"newValue\":\"Another value\",\"type\":\"CHANGED\"},"
+                + "\"setting2\":{\"oldValue\":200,\"newValue\":300,\"type\":\"CHANGED\"},\"setting3\":{\"oldValue"
+                + "\":true,\"newValue\":\"none\",\"type\":\"CHANGED\"}}";
+    }
+
     public String getJson1() throws Exception {
         return FileUtils.read("src/test/resources/file1.json");
     }
@@ -102,11 +119,11 @@ public final class TestData {
     }
 
     public String getYaml1() throws Exception {
-        return FileUtils.read("src/test/resources/file1.yaml");
+        return FileUtils.read("src/test/resources/file1.yml");
     }
 
     public String getYaml2() throws Exception {
-        return FileUtils.read("src/test/resources/file2.yaml");
+        return FileUtils.read("src/test/resources/file2.yml");
     }
 
     public Map<String, Object> getJson1Map() {

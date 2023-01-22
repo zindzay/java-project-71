@@ -12,11 +12,11 @@ numbers2:
   - 33
   - 44
   - 55
-id: null,
+id: null
 default:
   - value1
   - value2
-checked: true,
+checked: true
 numbers4:
   - 4
   - 5
@@ -25,5 +25,5 @@ chars1:
   - a
   - b
   - c
-chars2: false,
+chars2: false
 obj1: {nestedKey: value, isNested: true}

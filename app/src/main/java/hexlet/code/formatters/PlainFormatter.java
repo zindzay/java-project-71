@@ -1,6 +1,6 @@
 package hexlet.code.formatters;
 
-import hexlet.code.mapper.ValuesByState;
+import hexlet.code.mapper.Node;
 
 import java.util.List;
 import java.util.Map;
@@ -19,14 +19,14 @@ public final class PlainFormatter implements Formatter {
     private static final String COMPLEX_VALUE = "[complex value]";
 
     @Override
-    public String format(final Map<String, ValuesByState> entryMap) {
+    public String format(final Map<String, Node> keyByNode) throws IllegalArgumentException {
         final var sb = new StringBuilder();
 
-        for (var entry : entryMap.entrySet()) {
-            var oldValue = stringify(entry.getValue().oldValue());
-            var newValue = stringify(entry.getValue().newValue());
+        for (final var entry : keyByNode.entrySet()) {
+            final var oldValue = stringify(entry.getValue().oldValue());
+            final var newValue = stringify(entry.getValue().newValue());
 
-            switch (entry.getValue().state()) {
+            switch (entry.getValue().type()) {
                 case ADDED -> sb.append(PREFIX).append(QUOTE).append(entry.getKey()).append(QUOTE).append(ADDED)
                         .append(WITH_VALUE).append(newValue);
                 case DELETED -> sb.append(PREFIX).append(QUOTE).append(entry.getKey()).append(QUOTE).append(DELETED);
@@ -36,7 +36,7 @@ public final class PlainFormatter implements Formatter {
                 case UNCHANGED -> {
                     continue;
                 }
-                default -> throw new IllegalArgumentException("Unable to render");
+                default -> throw new IllegalArgumentException("Formatting error in plain format");
             }
             sb.append(LINE_SEPARATOR);
         }

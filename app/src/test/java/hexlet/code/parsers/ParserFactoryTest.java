@@ -13,7 +13,7 @@ class ParserFactoryTest {
         final Parser jsonpParser = ParserFactory.getParser("json");
         assertEquals(JsonParser.class, jsonpParser.getClass());
 
-        final Parser yamlParser = ParserFactory.getParser("YAML");
+        final Parser yamlParser = ParserFactory.getParser("YML");
         assertEquals(YamlParser.class, yamlParser.getClass());
     }
 
