@@ -7,11 +7,13 @@ import picocli.CommandLine.Parameters;
 
 import java.util.concurrent.Callable;
 
+import static hexlet.code.Params.DEFAULT_OUTPUT_FORMAT;
+
 @Command(name = "gendiff", mixinStandardHelpOptions = true, version = "1.0-SNAPSHOT",
         description = "Compares two configuration files and shows a difference.")
 public class App implements Callable<Integer> {
     @Option(names = {"-f", "--format"}, paramLabel = "format", description = "output format [default: stylish]")
-    private String format = "stylish";
+    private String format = DEFAULT_OUTPUT_FORMAT;
 
     @Parameters(paramLabel = "filepath1", description = "path to first file")
     private String filepath1;

@@ -20,13 +20,17 @@ class DifferTest {
                 "src/test/resources/file2.json", "stylish");
         final String expected = testData.getEntryMapStylishFormatString();
         assertEquals(expected, actual);
+
+        final String actualWithDefault = Differ.generate("src/test/resources/file1.json",
+                "src/test/resources/file2.json");
+        assertEquals(expected, actualWithDefault);
     }
 
     @Test
     void generateWithException() {
         final var thrown = assertThrows(IllegalArgumentException.class,
                 () -> Differ.generate("src/test/resources/file1.json",
-                        "src/test/resources/file2.yaml", "stylish"));
+                        "src/test/resources/file2.yml", "stylish"));
         assertEquals("Сan not compare different file types", thrown.getMessage());
     }
 }

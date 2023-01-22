@@ -9,15 +9,19 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class FormatterFactoryTest {
 
     @Test
-    void getRenderer() {
-        final Formatter formatter = FormatterFactory.getRenderer("stylish");
-        assertEquals(StylishFormatter.class, formatter.getClass());
+    void getFormatter() {
+        final Formatter stylishFormatter = FormatterFactory.getFormatter("stylish");
+        assertEquals(StylishFormatter.class, stylishFormatter.getClass());
+        final Formatter jsonFormatter = FormatterFactory.getFormatter("json");
+        assertEquals(JsonFormatter.class, jsonFormatter.getClass());
+        final Formatter plainFormatter = FormatterFactory.getFormatter("PLAIN");
+        assertEquals(PlainFormatter.class, plainFormatter.getClass());
     }
 
     @Test
-    void getRendererWithException() {
+    void getFormatterWithException() {
         final var thrown = assertThrows(UnsupportedOutputFormatException.class,
-                () -> FormatterFactory.getRenderer(""));
+                () -> FormatterFactory.getFormatter(""));
         assertEquals("The output format is not supported", thrown.getMessage());
     }
 }

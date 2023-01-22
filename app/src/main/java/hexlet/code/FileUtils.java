@@ -6,7 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public final class FileUtils {
-    public static final char EXTENSION_SEPARATOR = '.';
+    private static final char EXTENSION_SEPARATOR = '.';
 
     public static String read(final String filepath) throws Exception {
         final Path path = Paths.get(filepath).toAbsolutePath().normalize();
