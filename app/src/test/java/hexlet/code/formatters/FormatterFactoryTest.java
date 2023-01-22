@@ -1,4 +1,4 @@
-package hexlet.code.renderers;
+package hexlet.code.formatters;
 
 import hexlet.code.exceptions.UnsupportedOutputFormatException;
 import org.junit.jupiter.api.Test;
@@ -6,18 +6,18 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class RendererFactoryTest {
+class FormatterFactoryTest {
 
     @Test
     void getRenderer() {
-        final Renderer renderer = RendererFactory.getRenderer("stylish");
-        assertEquals(StylishRenderer.class, renderer.getClass());
+        final Formatter formatter = FormatterFactory.getRenderer("stylish");
+        assertEquals(StylishFormatter.class, formatter.getClass());
     }
 
     @Test
     void getRendererWithException() {
         final var thrown = assertThrows(UnsupportedOutputFormatException.class,
-                () -> RendererFactory.getRenderer(""));
+                () -> FormatterFactory.getRenderer(""));
         assertEquals("The output format is not supported", thrown.getMessage());
     }
 }

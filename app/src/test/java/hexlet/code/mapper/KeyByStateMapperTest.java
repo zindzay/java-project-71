@@ -1,6 +1,6 @@
-package hexlet.code;
+package hexlet.code.mapper;
 
-import hexlet.code.entry.Entry;
+import hexlet.code.TestData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,8 +20,8 @@ class KeyByStateMapperTest {
     void map() {
         final Map<String, Object> file1 = testData.getJson1Map();
         final Map<String, Object> file2 = testData.getJson2Map();
-        final Map<String, Entry> expected = testData.getEntryMap();
-        final Map<String, Entry> actual = KeyByStateMapper.map(file1, file2);
+        final Map<String, ValuesByState> expected = testData.getEntryMap();
+        final Map<String, ValuesByState> actual = KeyByStateMapper.map(file1, file2);
 
         assertEquals(expected, actual);
     }

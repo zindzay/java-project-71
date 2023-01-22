@@ -10,7 +10,7 @@ import java.util.TreeMap;
 
 public final class YamlParser implements Parser {
     @Override
-    public Map<String, Object> parse(String data) throws JsonProcessingException {
+    public Map<String, Object> parse(final String data) throws JsonProcessingException {
         ObjectMapper mapper = new YAMLMapper();
         return mapper.readValue(data, new TypeReference<TreeMap<String, Object>>() {
         });

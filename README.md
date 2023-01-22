@@ -7,6 +7,7 @@
 - [Сравнение двух json файлов и вывод в формате stylish](https://asciinema.org/a/DnXLJGOLO7CoxTsncAhIcZ6NQ)
 - [Сравнение двух yaml файлов и вывод в формате stylish](https://asciinema.org/a/MgLHcwu3ImdixDBhwgpnjk9zH)
 - [Обработка данных](https://asciinema.org/a/gnCLi0TPsfISsAtkCyjUrIDy0)
+- [Плоский формат](https://asciinema.org/a/TQBZfgqjORGMwwiOZDzKpoDnc)
 
 ## Start
 

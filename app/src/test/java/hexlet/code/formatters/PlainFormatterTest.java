@@ -1,7 +1,7 @@
-package hexlet.code.renderers;
+package hexlet.code.formatters;
 
 import hexlet.code.TestData;
-import hexlet.code.entry.Entry;
+import hexlet.code.mapper.ValuesByState;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -9,7 +9,7 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class StylishRendererTest {
+class PlainFormatterTest {
     private TestData testData;
 
     @BeforeEach
@@ -18,10 +18,10 @@ class StylishRendererTest {
     }
 
     @Test
-    void render() {
-        final Map<String, Entry> entryMap = testData.getEntryMap();
-        final String actual = new StylishRenderer().render(entryMap);
-        final String expected = testData.getEntryMapString();
+    void format() {
+        final Map<String, ValuesByState> entryMap = testData.getEntryMap();
+        final String actual = new PlainFormatter().format(entryMap);
+        final String expected = testData.getEntryMapPlainFormatString();
         assertEquals(expected, actual);
     }
 }

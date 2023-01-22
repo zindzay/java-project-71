@@ -1,7 +1,7 @@
 package hexlet.code;
 
-import hexlet.code.entry.Entry;
-import hexlet.code.entry.State;
+import hexlet.code.mapper.State;
+import hexlet.code.mapper.ValuesByState;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -17,8 +17,8 @@ public final class TestData {
     private final List<Integer> oldNumbers3 = List.of(3, 4, 5);
     private final List<Integer> newNumbers4 = List.of(4, 5, 6);
     private final List<String> newDefault = List.of("value1", "value2");
-    private final List<String>  chars1 = List.of("a", "b", "c");
-    private final List<String>  chars2 = List.of("d", "e", "f");
+    private final List<String> chars1 = List.of("a", "b", "c");
+    private final List<String> chars2 = List.of("d", "e", "f");
     private final int oldSetting2 = 200;
     private final int newSetting2 = 300;
     private final Map<String, Object> newObj1 = new LinkedHashMap<>();
@@ -28,28 +28,28 @@ public final class TestData {
         newObj1.put("isNested", true);
     }
 
-    public Map<String, Entry> getEntryMap() {
-        final Map<String, Entry> entryMap = new TreeMap<>();
-        entryMap.put("chars1", new Entry(List.of("a", "b", "c"), List.of("a", "b", "c"), State.UNCHANGED));
-        entryMap.put("chars2", new Entry(List.of("d", "e", "f"), false, State.CHANGED));
-        entryMap.put("checked", new Entry(false, true, State.CHANGED));
-        entryMap.put("default", new Entry(null, newDefault, State.CHANGED));
-        entryMap.put("id", new Entry(oldId, null, State.CHANGED));
-        entryMap.put("key1", new Entry("value1", null, State.DELETED));
-        entryMap.put("key2", new Entry(null, "value2", State.ADDED));
-        entryMap.put("numbers1", new Entry(number1, number1, State.UNCHANGED));
-        entryMap.put("numbers2", new Entry(oldNumbers2, newNumbers2, State.CHANGED));
-        entryMap.put("numbers3", new Entry(oldNumbers3, null, State.DELETED));
-        entryMap.put("numbers4", new Entry(null, newNumbers4, State.ADDED));
-        entryMap.put("obj1", new Entry(null, newObj1, State.ADDED));
-        entryMap.put("setting1", new Entry("Some value", "Another value", State.CHANGED));
-        entryMap.put("setting2", new Entry(oldSetting2, newSetting2, State.CHANGED));
-        entryMap.put("setting3", new Entry(true, "none", State.CHANGED));
+    public Map<String, ValuesByState> getEntryMap() {
+        final Map<String, ValuesByState> entryMap = new TreeMap<>();
+        entryMap.put("chars1", new ValuesByState(List.of("a", "b", "c"), List.of("a", "b", "c"), State.UNCHANGED));
+        entryMap.put("chars2", new ValuesByState(List.of("d", "e", "f"), false, State.CHANGED));
+        entryMap.put("checked", new ValuesByState(false, true, State.CHANGED));
+        entryMap.put("default", new ValuesByState(null, newDefault, State.CHANGED));
+        entryMap.put("id", new ValuesByState(oldId, null, State.CHANGED));
+        entryMap.put("key1", new ValuesByState("value1", null, State.DELETED));
+        entryMap.put("key2", new ValuesByState(null, "value2", State.ADDED));
+        entryMap.put("numbers1", new ValuesByState(number1, number1, State.UNCHANGED));
+        entryMap.put("numbers2", new ValuesByState(oldNumbers2, newNumbers2, State.CHANGED));
+        entryMap.put("numbers3", new ValuesByState(oldNumbers3, null, State.DELETED));
+        entryMap.put("numbers4", new ValuesByState(null, newNumbers4, State.ADDED));
+        entryMap.put("obj1", new ValuesByState(null, newObj1, State.ADDED));
+        entryMap.put("setting1", new ValuesByState("Some value", "Another value", State.CHANGED));
+        entryMap.put("setting2", new ValuesByState(oldSetting2, newSetting2, State.CHANGED));
+        entryMap.put("setting3", new ValuesByState(true, "none", State.CHANGED));
 
         return entryMap;
     }
 
-    public String getEntryMapString() {
+    public String getEntryMapStylishFormatString() {
         return "{\n"
                 + "    chars1: [a, b, c]\n"
                 + "  - chars2: [d, e, f]\n"
@@ -75,6 +75,22 @@ public final class TestData {
                 + "  - setting3: true\n"
                 + "  + setting3: none\n"
                 + "}";
+    }
+
+    public String getEntryMapPlainFormatString() {
+        return "Property 'chars2' was updated. From [complex value] to false\n"
+                + "Property 'checked' was updated. From false to true\n"
+                + "Property 'default' was updated. From null to [complex value]\n"
+                + "Property 'id' was updated. From 45 to null\n"
+                + "Property 'key1' was removed\n"
+                + "Property 'key2' was added with value: 'value2'\n"
+                + "Property 'numbers2' was updated. From [complex value] to [complex value]\n"
+                + "Property 'numbers3' was removed\n"
+                + "Property 'numbers4' was added with value: [complex value]\n"
+                + "Property 'obj1' was added with value: [complex value]\n"
+                + "Property 'setting1' was updated. From 'Some value' to 'Another value'\n"
+                + "Property 'setting2' was updated. From 200 to 300\n"
+                + "Property 'setting3' was updated. From true to 'none'";
     }
 
     public String getJson1() throws Exception {

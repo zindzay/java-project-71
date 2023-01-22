@@ -18,7 +18,7 @@ class DifferTest {
     void generate() throws Exception {
         final String actual = Differ.generate("src/test/resources/file1.json",
                 "src/test/resources/file2.json", "stylish");
-        final String expected = testData.getEntryMapString();
+        final String expected = testData.getEntryMapStylishFormatString();
         assertEquals(expected, actual);
     }
 

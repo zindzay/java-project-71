@@ -1,4 +1,4 @@
-package hexlet.code.entry;
+package hexlet.code.mapper;
 
 public enum State {
     ADDED,

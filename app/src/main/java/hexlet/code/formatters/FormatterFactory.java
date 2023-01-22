@@ -1,12 +1,13 @@
-package hexlet.code.renderers;
+package hexlet.code.formatters;
 
 import hexlet.code.exceptions.UnsupportedOutputFormatException;
 
-public final class RendererFactory {
-    public static Renderer getRenderer(final String type) {
+public final class FormatterFactory {
+    public static Formatter getRenderer(final String type) {
         try {
             return switch (Format.valueOf(type.toUpperCase())) {
-                case STYLISH -> new StylishRenderer();
+                case STYLISH -> new StylishFormatter();
+                case PLAIN -> new PlainFormatter();
                 case JSON -> null;
             };
         } catch (Exception e) {

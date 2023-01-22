@@ -1,7 +1,8 @@
 package hexlet.code;
 
+import hexlet.code.mapper.KeyByStateMapper;
 import hexlet.code.parsers.ParserFactory;
-import hexlet.code.renderers.RendererFactory;
+import hexlet.code.formatters.FormatterFactory;
 
 import java.util.Map;
 
@@ -15,11 +16,11 @@ public final class Differ {
             throw new IllegalArgumentException("Сan not compare different file types");
         }
 
-        final var renderer = RendererFactory.getRenderer(format);
+        final var renderer = FormatterFactory.getRenderer(format);
         final var parser = ParserFactory.getParser(extension1);
         final Map<String, Object> file1 = parser.parse(FileUtils.read(filePath1));
         final Map<String, Object> file2 = parser.parse(FileUtils.read(filePath2));
 
-        return renderer.render(KeyByStateMapper.map(file1, file2));
+        return renderer.format(KeyByStateMapper.map(file1, file2));
     }
 }

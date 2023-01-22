@@ -1,10 +1,10 @@
-package hexlet.code.renderers;
+package hexlet.code.formatters;
 
-import hexlet.code.entry.Entry;
+import hexlet.code.mapper.ValuesByState;
 
 import java.util.Map;
 
-public final class StylishRenderer implements Renderer {
+public final class StylishFormatter implements Formatter {
     private static final String ADDED = "+ ";
     private static final String DELETED = "- ";
     private static final String UNCHANGED = "  ";
@@ -13,8 +13,8 @@ public final class StylishRenderer implements Renderer {
     private static final String LINE_SEPARATOR = "\n";
 
     @Override
-    public String render(final Map<String, Entry> entryMap) throws IllegalArgumentException {
-        var sb = new StringBuilder();
+    public String format(final Map<String, ValuesByState> entryMap) throws IllegalArgumentException {
+        final var sb = new StringBuilder();
 
         sb.append("{").append(LINE_SEPARATOR);
         for (var entry : entryMap.entrySet()) {
@@ -24,11 +24,10 @@ public final class StylishRenderer implements Renderer {
                         sb.append(ADDED).append(entry.getKey()).append(DELIMITER).append(entry.getValue().newValue());
                 case DELETED ->
                         sb.append(DELETED).append(entry.getKey()).append(DELIMITER).append(entry.getValue().oldValue());
-                case CHANGED -> {
-                    sb.append(DELETED).append(entry.getKey()).append(DELIMITER).append(entry.getValue().oldValue());
-                    sb.append(LINE_SEPARATOR).append(INDENT);
-                    sb.append(ADDED).append(entry.getKey()).append(DELIMITER).append(entry.getValue().newValue());
-                }
+                case CHANGED ->
+                    sb.append(DELETED).append(entry.getKey()).append(DELIMITER).append(entry.getValue().oldValue())
+                            .append(LINE_SEPARATOR).append(INDENT)
+                            .append(ADDED).append(entry.getKey()).append(DELIMITER).append(entry.getValue().newValue());
                 case UNCHANGED -> sb.append(UNCHANGED).append(entry.getKey()).append(DELIMITER)
                         .append(entry.getValue().oldValue());
                 default -> throw new IllegalArgumentException("Unable to render");
