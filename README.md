@@ -4,7 +4,8 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/3b5e4b39ee2061c72d34/test_coverage)](https://codeclimate.com/github/zindzay/java-project-71/test_coverage)
 
 ## Примеры:
-- [Сравнение двух json и вывод в формате stylish](https://asciinema.org/a/DnXLJGOLO7CoxTsncAhIcZ6NQ)
+- [Сравнение двух json файлов и вывод в формате stylish](https://asciinema.org/a/DnXLJGOLO7CoxTsncAhIcZ6NQ)
+- [Сравнение двух yaml файлов и вывод в формате stylish](https://asciinema.org/a/MgLHcwu3ImdixDBhwgpnjk9zH)
 
 ## Start
 

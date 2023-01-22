@@ -10,8 +10,11 @@ class ParserFactoryTest {
 
     @Test
     void getParser() {
-        final Parser parser = ParserFactory.getParser("json");
-        assertEquals(JsonParser.class, parser.getClass());
+        final Parser jsonpParser = ParserFactory.getParser("json");
+        assertEquals(JsonParser.class, jsonpParser.getClass());
+
+        final Parser yamlParser = ParserFactory.getParser("YAML");
+        assertEquals(YamlParser.class, yamlParser.getClass());
     }
 
     @Test

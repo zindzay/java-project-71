@@ -7,7 +7,7 @@ public final class ParserFactory {
         try {
             return switch (Extension.valueOf(type.toUpperCase())) {
                 case JSON -> new JsonParser();
-                case YAML -> null;
+                case YAML -> new YamlParser();
             };
         } catch (Exception e) {
             throw new UnsupportedFileTypeException("The file is not supported");
