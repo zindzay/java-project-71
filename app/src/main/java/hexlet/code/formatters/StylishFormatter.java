@@ -17,19 +17,26 @@ public final class StylishFormatter implements Formatter {
         final var sb = new StringBuilder();
 
         sb.append("{").append(LINE_SEPARATOR);
-        for (final var entry : keyByNode.entrySet()) {
+        for (final var node : keyByNode.entrySet()) {
             sb.append(INDENT);
-            switch (entry.getValue().type()) {
-                case ADDED ->
-                        sb.append(ADDED).append(entry.getKey()).append(DELIMITER).append(entry.getValue().newValue());
-                case DELETED ->
-                        sb.append(DELETED).append(entry.getKey()).append(DELIMITER).append(entry.getValue().oldValue());
-                case CHANGED ->
-                    sb.append(DELETED).append(entry.getKey()).append(DELIMITER).append(entry.getValue().oldValue())
-                            .append(LINE_SEPARATOR).append(INDENT)
-                            .append(ADDED).append(entry.getKey()).append(DELIMITER).append(entry.getValue().newValue());
-                case UNCHANGED -> sb.append(UNCHANGED).append(entry.getKey()).append(DELIMITER)
-                        .append(entry.getValue().oldValue());
+            switch (node.getValue().type()) {
+                case ADDED -> {
+                    final var addedString = ADDED + node.getKey() + DELIMITER + node.getValue().newValue();
+                    sb.append(addedString);
+                }
+                case DELETED -> {
+                    final var deletedString = DELETED + node.getKey() + DELIMITER + node.getValue().oldValue();
+                    sb.append(deletedString);
+                }
+                case CHANGED -> {
+                    final var changedString = DELETED + node.getKey() + DELIMITER + node.getValue().oldValue()
+                            + LINE_SEPARATOR + INDENT + ADDED + node.getKey() + DELIMITER + node.getValue().newValue();
+                    sb.append(changedString);
+                }
+                case UNCHANGED -> {
+                    final var unchangedString = UNCHANGED + node.getKey() + DELIMITER + node.getValue().oldValue();
+                    sb.append(unchangedString);
+                }
                 default -> throw new IllegalArgumentException("Formatting error in stylish format");
             }
             sb.append(LINE_SEPARATOR);

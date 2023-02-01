@@ -19,9 +19,9 @@ class PlainFormatterTest {
 
     @Test
     void format() {
-        final Map<String, Node> keyByNode = testData.getEntryMap();
+        final Map<String, Node> keyByNode = testData.getNodeMap();
         final String actual = new PlainFormatter().format(keyByNode);
-        final String expected = testData.getEntryMapPlainFormatString();
+        final String expected = testData.getPlainFormatString();
         assertEquals(expected, actual);
     }
 }

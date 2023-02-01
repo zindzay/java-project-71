@@ -22,17 +22,24 @@ public final class PlainFormatter implements Formatter {
     public String format(final Map<String, Node> keyByNode) throws IllegalArgumentException {
         final var sb = new StringBuilder();
 
-        for (final var entry : keyByNode.entrySet()) {
-            final var oldValue = stringify(entry.getValue().oldValue());
-            final var newValue = stringify(entry.getValue().newValue());
+        for (final var node : keyByNode.entrySet()) {
+            final var oldValue = stringify(node.getValue().oldValue());
+            final var newValue = stringify(node.getValue().newValue());
 
-            switch (entry.getValue().type()) {
-                case ADDED -> sb.append(PREFIX).append(QUOTE).append(entry.getKey()).append(QUOTE).append(ADDED)
-                        .append(WITH_VALUE).append(newValue);
-                case DELETED -> sb.append(PREFIX).append(QUOTE).append(entry.getKey()).append(QUOTE).append(DELETED);
-                case CHANGED -> sb.append(PREFIX).append(QUOTE).append(entry.getKey()).append(QUOTE).append(CHANGED)
-                        .append(FROM).append(oldValue).append(TO)
-                        .append(newValue);
+            switch (node.getValue().type()) {
+                case ADDED -> {
+                    final var addedString = PREFIX + QUOTE + node.getKey() + QUOTE + ADDED + WITH_VALUE + newValue;
+                    sb.append(addedString);
+                }
+                case DELETED -> {
+                    final var deletedString = PREFIX + QUOTE + node.getKey() + QUOTE + DELETED;
+                    sb.append(deletedString);
+                }
+                case CHANGED -> {
+                    final var changedString =
+                            PREFIX + QUOTE + node.getKey() + QUOTE + CHANGED + FROM + oldValue + TO + newValue;
+                    sb.append(changedString);
+                }
                 case UNCHANGED -> {
                     continue;
                 }

@@ -19,9 +19,9 @@ class JsonFormatterTest {
 
     @Test
     void format() {
-        final Map<String, Node> keyByNode = testData.getEntryMap();
+        final Map<String, Node> keyByNode = testData.getNodeMap();
         final String actual = new JsonFormatter().format(keyByNode);
-        final String expected = testData.getEntryMapJsonFormatString();
+        final String expected = testData.getJsonFormatString();
         assertEquals(expected, actual);
     }
 }
