@@ -28,7 +28,7 @@ public final class TestData {
         newObj1.put("isNested", true);
     }
 
-    public Map<String, Node> getEntryMap() {
+    public Map<String, Node> getNodeMap() {
         final Map<String, Node> keyByNode = new TreeMap<>();
         keyByNode.put("chars1", new Node(List.of("a", "b", "c"), List.of("a", "b", "c"), Type.UNCHANGED));
         keyByNode.put("chars2", new Node(List.of("d", "e", "f"), false, Type.CHANGED));
@@ -49,7 +49,7 @@ public final class TestData {
         return keyByNode;
     }
 
-    public String getEntryMapStylishFormatString() {
+    public String getStylishFormatString() {
         return "{\n"
                 + "    chars1: [a, b, c]\n"
                 + "  - chars2: [d, e, f]\n"
@@ -77,7 +77,7 @@ public final class TestData {
                 + "}";
     }
 
-    public String getEntryMapPlainFormatString() {
+    public String getPlainFormatString() {
         return "Property 'chars2' was updated. From [complex value] to false\n"
                 + "Property 'checked' was updated. From false to true\n"
                 + "Property 'default' was updated. From null to [complex value]\n"
@@ -93,7 +93,7 @@ public final class TestData {
                 + "Property 'setting3' was updated. From true to 'none'";
     }
 
-    public String getEntryMapJsonFormatString() {
+    public String getJsonFormatString() {
         return "{\"chars1\":{\"oldValue\":[\"a\",\"b\",\"c\"],\"newValue\":[\"a\",\"b\",\"c\"],\"type\":"
                 + "\"UNCHANGED\"},\"chars2\":{\"oldValue\":[\"d\",\"e\",\"f\"],\"newValue\":false,\"type\":"
                 + "\"CHANGED\"},\"checked\":{\"oldValue\":false,\"newValue\":true,\"type\":\"CHANGED\"},\"default\""

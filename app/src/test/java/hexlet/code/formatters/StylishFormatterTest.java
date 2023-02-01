@@ -19,9 +19,9 @@ class StylishFormatterTest {
 
     @Test
     void format() {
-        final Map<String, Node> keyByNode = testData.getEntryMap();
+        final Map<String, Node> keyByNode = testData.getNodeMap();
         final String actual = new StylishFormatter().format(keyByNode);
-        final String expected = testData.getEntryMapStylishFormatString();
+        final String expected = testData.getStylishFormatString();
         assertEquals(expected, actual);
     }
 }

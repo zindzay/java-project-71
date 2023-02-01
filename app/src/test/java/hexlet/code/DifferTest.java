@@ -22,7 +22,7 @@ class DifferTest {
     void generate() throws Exception {
         final String actualJson = Differ.generate("src/test/resources/file1.json",
                 "src/test/resources/file2.json", "stylish");
-        final String expectedStylishFormatter = testData.getEntryMapStylishFormatString();
+        final String expectedStylishFormatter = testData.getStylishFormatString();
         assertEquals(expectedStylishFormatter, actualJson);
 
         final String actualYml = Differ.generate("src/test/resources/file1.yml",
@@ -31,12 +31,12 @@ class DifferTest {
 
         final String actualPlainFormatter = Differ.generate("src/test/resources/file1.yml",
                 "src/test/resources/file2.yml", "plain");
-        final String expectedPlaynFormatter = testData.getEntryMapPlainFormatString();
+        final String expectedPlaynFormatter = testData.getPlainFormatString();
         assertEquals(expectedPlaynFormatter, actualPlainFormatter);
 
         final String actualJsonFormatFormatter = Differ.generate("src/test/resources/file1.yml",
                 "src/test/resources/file2.yml", "json");
-        final String expectedJsonFormatter = testData.getEntryMapJsonFormatString();
+        final String expectedJsonFormatter = testData.getJsonFormatString();
         assertEquals(expectedJsonFormatter, actualJsonFormatFormatter);
 
         final String actualDefaultFormatter = Differ.generate("src/test/resources/file1.json",

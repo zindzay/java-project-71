@@ -12,6 +12,9 @@ import static hexlet.code.Params.DEFAULT_OUTPUT_FORMAT;
 @Command(name = "gendiff", mixinStandardHelpOptions = true, version = "1.0-SNAPSHOT",
         description = "Compares two configuration files and shows a difference.")
 public class App implements Callable<Integer> {
+    private static final int OK_CODE = 0;
+    private static final int ERROR_CODE = -1;
+
     @Option(names = {"-f", "--format"}, paramLabel = "format", description = "output format [default: stylish]")
     private String format = DEFAULT_OUTPUT_FORMAT;
 
@@ -25,10 +28,10 @@ public class App implements Callable<Integer> {
     public final Integer call() {
         try {
             System.out.println(Differ.generate(filepath1, filepath2, format));
-            return 0;
+            return OK_CODE;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return -1;
+            return ERROR_CODE;
         }
     }
 

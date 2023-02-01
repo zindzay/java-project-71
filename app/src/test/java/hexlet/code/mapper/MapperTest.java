@@ -20,7 +20,7 @@ class MapperTest {
     void map() {
         final Map<String, Object> file1 = testData.getJson1Map();
         final Map<String, Object> file2 = testData.getJson2Map();
-        final Map<String, Node> expected = testData.getEntryMap();
+        final Map<String, Node> expected = testData.getNodeMap();
         final Map<String, Node> actual = Mapper.map(file1, file2);
 
         assertEquals(expected, actual);
