@@ -9,20 +9,21 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MapperTest {
-    private TestData testData;
+    private Map<String, Object> file1;
+    private Map<String, Object> file2;
+    private Map<String, Node> nodeMap;
 
     @BeforeEach
     public void beforeEach() {
-        testData = new TestData();
+        var testData = new TestData();
+        file1 = testData.getJson1Map();
+        file2 = testData.getJson2Map();
+        nodeMap = testData.getNodeMap();
     }
 
     @Test
     void map() {
-        final Map<String, Object> file1 = testData.getJson1Map();
-        final Map<String, Object> file2 = testData.getJson2Map();
-        final Map<String, Node> expected = testData.getNodeMap();
         final Map<String, Node> actual = Mapper.map(file1, file2);
-
-        assertEquals(expected, actual);
+        assertEquals(nodeMap, actual);
     }
 }

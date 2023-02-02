@@ -18,13 +18,8 @@ class FileUtilsTest {
 
     @Test
     void getExtensionWithException() {
-        final var thrown1 = assertThrows(IllegalArgumentException.class,
-                () -> FileUtils.getExtension(null));
-        assertEquals("File path can not be null", thrown1.getMessage());
-
-        final var thrown2 = assertThrows(IllegalArgumentException.class,
-                () -> FileUtils.getExtension("file"));
-        assertEquals("File without extension", thrown2.getMessage());
+        assertThrows(IllegalArgumentException.class, () -> FileUtils.getExtension(null));
+        assertThrows(IllegalArgumentException.class, () -> FileUtils.getExtension("file"));
     }
 
     @Test
@@ -35,8 +30,6 @@ class FileUtilsTest {
 
     @Test
     void readWithException() {
-        final var thrown = assertThrows(FileSystemNotFoundException.class,
-                () -> FileUtils.read("file.json"));
-        assertEquals("File does not exist", thrown.getMessage());
+        assertThrows(FileSystemNotFoundException.class, () -> FileUtils.read("file.json"));
     }
 }

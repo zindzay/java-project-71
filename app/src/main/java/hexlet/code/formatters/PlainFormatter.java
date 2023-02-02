@@ -26,7 +26,8 @@ public final class PlainFormatter implements Formatter {
                 case UNCHANGED -> {
                     continue;
                 }
-                default -> throw new IllegalArgumentException("Formatting error in plain format");
+                default -> throw new IllegalArgumentException(
+                        String.format("Formatting error in plain format. KeyByNode: %s", keyByNode));
             }
             sb.append("\n");
         }

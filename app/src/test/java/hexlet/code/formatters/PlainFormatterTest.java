@@ -10,18 +10,19 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PlainFormatterTest {
-    private TestData testData;
+    private Map<String, Node> keyByNode;
+    private String plainFormatString;
 
     @BeforeEach
-    public void beforeEach() {
-        testData = new TestData();
+    public void beforeEach() throws Exception {
+        var testData = new TestData();
+        keyByNode = testData.getNodeMap();
+        plainFormatString = testData.getPlainFormatString();
     }
 
     @Test
     void format() {
-        final Map<String, Node> keyByNode = testData.getNodeMap();
         final String actual = new PlainFormatter().format(keyByNode);
-        final String expected = testData.getPlainFormatString();
-        assertEquals(expected, actual);
+        assertEquals(plainFormatString, actual);
     }
 }

@@ -10,18 +10,19 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class StylishFormatterTest {
-    private TestData testData;
+    private Map<String, Node> keyByNode;
+    private String stylishFormatString;
 
     @BeforeEach
-    public void beforeEach() {
-        testData = new TestData();
+    public void beforeEach() throws Exception {
+        var testData = new TestData();
+        keyByNode = testData.getNodeMap();
+        stylishFormatString = testData.getStylishFormatString();
     }
 
     @Test
     void format() {
-        final Map<String, Node> keyByNode = testData.getNodeMap();
         final String actual = new StylishFormatter().format(keyByNode);
-        final String expected = testData.getStylishFormatString();
-        assertEquals(expected, actual);
+        assertEquals(stylishFormatString, actual);
     }
 }

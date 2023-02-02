@@ -49,65 +49,16 @@ public final class TestData {
         return keyByNode;
     }
 
-    public String getStylishFormatString() {
-        return "{\n"
-                + "    chars1: [a, b, c]\n"
-                + "  - chars2: [d, e, f]\n"
-                + "  + chars2: false\n"
-                + "  - checked: false\n"
-                + "  + checked: true\n"
-                + "  - default: null\n"
-                + "  + default: [value1, value2]\n"
-                + "  - id: 45\n"
-                + "  + id: null\n"
-                + "  - key1: value1\n"
-                + "  + key2: value2\n"
-                + "    numbers1: [1, 2, 3, 4]\n"
-                + "  - numbers2: [2, 3, 4, 5]\n"
-                + "  + numbers2: [22, 33, 44, 55]\n"
-                + "  - numbers3: [3, 4, 5]\n"
-                + "  + numbers4: [4, 5, 6]\n"
-                + "  + obj1: {nestedKey=value, isNested=true}\n"
-                + "  - setting1: Some value\n"
-                + "  + setting1: Another value\n"
-                + "  - setting2: 200\n"
-                + "  + setting2: 300\n"
-                + "  - setting3: true\n"
-                + "  + setting3: none\n"
-                + "}";
+    public String getStylishFormatString() throws Exception {
+        return FileUtils.read("src/test/resources/stylishFormatString");
     }
 
-    public String getPlainFormatString() {
-        return "Property 'chars2' was updated. From [complex value] to false\n"
-                + "Property 'checked' was updated. From false to true\n"
-                + "Property 'default' was updated. From null to [complex value]\n"
-                + "Property 'id' was updated. From 45 to null\n"
-                + "Property 'key1' was removed\n"
-                + "Property 'key2' was added with value: 'value2'\n"
-                + "Property 'numbers2' was updated. From [complex value] to [complex value]\n"
-                + "Property 'numbers3' was removed\n"
-                + "Property 'numbers4' was added with value: [complex value]\n"
-                + "Property 'obj1' was added with value: [complex value]\n"
-                + "Property 'setting1' was updated. From 'Some value' to 'Another value'\n"
-                + "Property 'setting2' was updated. From 200 to 300\n"
-                + "Property 'setting3' was updated. From true to 'none'";
+    public String getPlainFormatString() throws Exception {
+        return FileUtils.read("src/test/resources/plainFormatString");
     }
 
-    public String getJsonFormatString() {
-        return "{\"chars1\":{\"oldValue\":[\"a\",\"b\",\"c\"],\"newValue\":[\"a\",\"b\",\"c\"],\"type\":"
-                + "\"UNCHANGED\"},\"chars2\":{\"oldValue\":[\"d\",\"e\",\"f\"],\"newValue\":false,\"type\":"
-                + "\"CHANGED\"},\"checked\":{\"oldValue\":false,\"newValue\":true,\"type\":\"CHANGED\"},\"default\""
-                + ":{\"oldValue\":null,\"newValue\":[\"value1\",\"value2\"],\"type\":\"CHANGED\"},\"id\":"
-                + "{\"oldValue\":45,\"newValue\":null,\"type\":\"CHANGED\"},\"key1\":{\"oldValue\":\"value1\","
-                + "\"newValue\":null,\"type\":\"DELETED\"},\"key2\":{\"oldValue\":null,\"newValue\":\"value2\","
-                + "\"type\":\"ADDED\"},\"numbers1\":{\"oldValue\":[1,2,3,4],\"newValue\":[1,2,3,4],\"type\":"
-                + "\"UNCHANGED\"},\"numbers2\":{\"oldValue\":[2,3,4,5],\"newValue\":[22,33,44,55],\"type\":"
-                + "\"CHANGED\"},\"numbers3\":{\"oldValue\":[3,4,5],\"newValue\":null,\"type\":\"DELETED\"},"
-                + "\"numbers4\":{\"oldValue\":null,\"newValue\":[4,5,6],\"type\":\"ADDED\"},\"obj1\":"
-                + "{\"oldValue\":null,\"newValue\":{\"nestedKey\":\"value\",\"isNested\":true},\"type\":\"ADDED\"},"
-                + "\"setting1\":{\"oldValue\":\"Some value\",\"newValue\":\"Another value\",\"type\":\"CHANGED\"},"
-                + "\"setting2\":{\"oldValue\":200,\"newValue\":300,\"type\":\"CHANGED\"},\"setting3\":{\"oldValue"
-                + "\":true,\"newValue\":\"none\",\"type\":\"CHANGED\"}}";
+    public String getJsonFormatString() throws Exception {
+        return FileUtils.read("src/test/resources/jsonFormatString");
     }
 
     public String getJson1() throws Exception {

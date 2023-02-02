@@ -1,6 +1,5 @@
 package hexlet.code.formatters;
 
-import hexlet.code.exceptions.UnsupportedOutputFormatException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,8 +19,6 @@ class FormatterFactoryTest {
 
     @Test
     void getFormatterWithException() {
-        final var thrown = assertThrows(UnsupportedOutputFormatException.class,
-                () -> FormatterFactory.getFormatter(""));
-        assertEquals("The output format is not supported", thrown.getMessage());
+        assertThrows(IllegalArgumentException.class, () -> FormatterFactory.getFormatter(""));
     }
 }

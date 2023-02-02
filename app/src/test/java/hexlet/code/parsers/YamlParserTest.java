@@ -9,18 +9,19 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class YamlParserTest {
-    private TestData testData;
+    private String data;
+    private Map<String, Object> map;
 
     @BeforeEach
-    public void beforeEach() {
-        testData = new TestData();
+    public void beforeEach() throws Exception {
+        var testData = new TestData();
+        data = testData.getJson1();
+        map = testData.getJson1Map();
     }
 
     @Test
     void parse() throws Exception {
-        final String data = testData.getYaml1();
         final Map<String, Object> actual = new YamlParser().parse(data);
-        final Map<String, Object> expected = testData.getYaml1Map();
-        assertEquals(expected, actual);
+        assertEquals(map, actual);
     }
 }

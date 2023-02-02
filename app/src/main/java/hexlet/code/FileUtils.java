@@ -12,7 +12,7 @@ public final class FileUtils {
         final Path path = Paths.get(filepath).toAbsolutePath().normalize();
 
         if (!Files.exists(path)) {
-            throw new FileSystemNotFoundException("File does not exist");
+            throw new FileSystemNotFoundException(String.format("File does not exist. Path: '%s'", filepath));
         }
 
         return Files.readString(path);
@@ -26,7 +26,7 @@ public final class FileUtils {
         final int index = filepath.lastIndexOf(EXTENSION_SEPARATOR);
 
         if (index == -1) {
-            throw new IllegalArgumentException("File without extension");
+            throw new IllegalArgumentException(String.format("File: '%s', without extension", filepath));
         }
 
         return filepath.substring(index + 1);

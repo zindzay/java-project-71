@@ -1,6 +1,5 @@
 package hexlet.code.parsers;
 
-import hexlet.code.exceptions.UnsupportedFileTypeException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,8 +18,6 @@ class ParserFactoryTest {
 
     @Test
     void getParserWithException() {
-        final var thrown = assertThrows(UnsupportedFileTypeException.class,
-                () -> ParserFactory.getParser(""));
-        assertEquals("The file is not supported", thrown.getMessage());
+        assertThrows(IllegalArgumentException.class, () -> ParserFactory.getParser(""));
     }
 }

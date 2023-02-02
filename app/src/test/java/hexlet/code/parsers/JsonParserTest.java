@@ -9,19 +9,20 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class JsonParserTest {
-    private TestData testData;
+    private String data;
+    private Map<String, Object> map;
 
     @BeforeEach
-    public void beforeEach() {
-        testData = new TestData();
+    public void beforeEach() throws Exception {
+        var testData = new TestData();
+        data = testData.getJson1();
+        map = testData.getJson1Map();
     }
 
 
     @Test
     void parse() throws Exception {
-        final String data = testData.getJson1();
         final Map<String, Object> actual = new JsonParser().parse(data);
-        final Map<String, Object> expected = testData.getJson1Map();
-        assertEquals(expected, actual);
+        assertEquals(map, actual);
     }
 }

@@ -18,7 +18,8 @@ public final class StylishFormatter implements Formatter {
                 case CHANGED -> sb.append(String.format("- %s: %s%n  + %s: %s",
                         node.getKey(), node.getValue().oldValue(), node.getKey(), node.getValue().newValue()));
                 case UNCHANGED -> sb.append(String.format("  %s: %s", node.getKey(), node.getValue().oldValue()));
-                default -> throw new IllegalArgumentException("Formatting error in stylish format");
+                default -> throw new IllegalArgumentException(
+                        String.format("Formatting error in stylish format. KeyByNode: %s", keyByNode));
             }
             sb.append("\n");
         }

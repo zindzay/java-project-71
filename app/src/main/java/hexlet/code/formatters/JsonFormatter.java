@@ -12,7 +12,8 @@ public final class JsonFormatter implements Formatter {
             ObjectMapper objectMapper = new ObjectMapper();
             return objectMapper.writeValueAsString(keyByNode);
         } catch (Exception e) {
-            throw new IllegalArgumentException("Formatting error in json format");
+            throw new IllegalArgumentException(
+                    String.format("Formatting error in json format. KeyByNode: %s", keyByNode));
         }
     }
 }

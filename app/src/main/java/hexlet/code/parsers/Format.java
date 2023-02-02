@@ -1,6 +1,6 @@
 package hexlet.code.parsers;
 
-public enum Extension {
+public enum Format {
     JSON,
     YML,
 }

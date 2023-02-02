@@ -10,18 +10,19 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class JsonFormatterTest {
-    private TestData testData;
+    private Map<String, Node> keyByNode;
+    private String jsonFormatString;
 
     @BeforeEach
-    public void beforeEach() {
-        testData = new TestData();
+    public void beforeEach() throws Exception {
+        var testData = new TestData();
+        keyByNode = testData.getNodeMap();
+        jsonFormatString = testData.getJsonFormatString();
     }
 
     @Test
     void format() {
-        final Map<String, Node> keyByNode = testData.getNodeMap();
         final String actual = new JsonFormatter().format(keyByNode);
-        final String expected = testData.getJsonFormatString();
-        assertEquals(expected, actual);
+        assertEquals(jsonFormatString, actual);
     }
 }
