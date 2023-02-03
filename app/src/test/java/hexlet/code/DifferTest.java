@@ -3,64 +3,39 @@ package hexlet.code;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.nio.file.FileSystemNotFoundException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class DifferTest {
-    private String outFormatJson;
-    private String outFormatStylish;
-    private String outFormatPlain;
+    private String resultJson;
+    private String resultStylish;
+    private String resultPlain;
 
     @BeforeEach
     public void beforeEach() throws Exception {
         var testData = new TestData();
-        outFormatJson = testData.getJsonFormatString();
-        outFormatStylish = testData.getStylishFormatString();
-        outFormatPlain = testData.getPlainFormatString();
+        resultJson = testData.getJsonFormatString();
+        resultStylish = testData.getStylishFormatString();
+        resultPlain = testData.getPlainFormatString();
     }
 
-    @Test
-    void generate() throws Exception {
-        // JSON
-        final String actualInJsonOutStylish = Differ.generate("src/test/resources/file1.json",
-                "src/test/resources/file2.json", "stylish");
-        assertEquals(outFormatStylish, actualInJsonOutStylish);
+    @ParameterizedTest
+    @ValueSource(strings = {"json", "yml", "yaml"})
+    void generateTest(final String format) throws Exception {
+        final String filePath1 = getFixturePath("file1." + format).toString();
+        final String filePath2 = getFixturePath("file2." + format).toString();
 
-        final String actualInJsonOutJson = Differ.generate("src/test/resources/file1.json",
-                "src/test/resources/file2.json", "json");
-        assertEquals(outFormatJson, actualInJsonOutJson);
-
-        final String actualInJsonOutPlain = Differ.generate("src/test/resources/file1.json",
-                "src/test/resources/file2.json", "plain");
-        assertEquals(outFormatPlain, actualInJsonOutPlain);
-
-        final String actualInJsonOutDefault = Differ.generate("src/test/resources/file1.json",
-                "src/test/resources/file2.json");
-        assertEquals(outFormatStylish, actualInJsonOutDefault);
-        // YML
-        final String actualInYamlOutStylish = Differ.generate("src/test/resources/file1.yml",
-                "src/test/resources/file2.yml", "stylish");
-        assertEquals(outFormatStylish, actualInYamlOutStylish);
-
-        final String actualInYamlOutJson = Differ.generate("src/test/resources/file1.yml",
-                "src/test/resources/file2.yml", "json");
-        assertEquals(outFormatJson, actualInYamlOutJson);
-
-        final String actualInYamlOutPlain = Differ.generate("src/test/resources/file1.yml",
-                "src/test/resources/file2.yml", "plain");
-        assertEquals(outFormatPlain, actualInYamlOutPlain);
-
-        final String actualInYamlOutDefault = Differ.generate("src/test/resources/file1.yml",
-                "src/test/resources/file2.yml");
-        assertEquals(outFormatStylish, actualInYamlOutDefault);
-
-        final String actualEmpty = Differ.generate("src/test/resources/file3.json",
-                "src/test/resources/file3.json");
-        final String expectedEmpty = "{\n}";
-        assertEquals(expectedEmpty, actualEmpty);
+        assertEquals(resultStylish, Differ.generate(filePath1, filePath2));
+        assertEquals(resultStylish, Differ.generate(filePath1, filePath2, "stylish"));
+        assertEquals(resultPlain, Differ.generate(filePath1, filePath2, "plain"));
+        assertEquals(resultJson, Differ.generate(filePath1, filePath2, "json"));
     }
 
     @Test
@@ -77,5 +52,10 @@ class DifferTest {
 
         assertThrows(MismatchedInputException.class,
                 () -> Differ.generate("src/test/resources/empty1.json", "src/test/resources/empty1.json"));
+    }
+
+    private Path getFixturePath(String file) {
+        final var resourcesDir = "src/test/resources/";
+        return Paths.get(resourcesDir + file);
     }
 }

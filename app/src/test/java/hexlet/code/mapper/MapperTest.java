@@ -23,7 +23,6 @@ class MapperTest {
 
     @Test
     void map() {
-        final Map<String, Node> actual = Mapper.map(file1, file2);
-        assertEquals(nodeMap, actual);
+        assertEquals(nodeMap, Mapper.map(file1, file2));
     }
 }
